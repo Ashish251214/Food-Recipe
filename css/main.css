@@ -36,6 +36,10 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0 3px;
 }
 
+.header_branding .social_header .col-md-6:last-child .myAccount {
+  float: right;
+}
+
 .header_branding .social_header .col-md-6:last-child .social_header_icons {
   padding-right: 10px;
   border-right: 1px solid var(--light);
@@ -61,59 +65,42 @@ h1, h2, h3, h4, h5, h6 {
   padding: 1rem 0;
 }
 
-.header_branding .navigation_bar .flexible {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-.header_branding .navigation_bar .flexible .navigation_bar-logo {
+.header_branding .navigation_bar .navigation_bar-logo {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
 }
 
-.header_branding .navigation_bar .flexible .navigation_bar-logo img {
+.header_branding .navigation_bar .navigation_bar-logo img {
   width: 100%;
   max-width: 80px;
 }
 
-.header_branding .navigation_bar .flexible nav {
+.header_branding .navigation_bar nav {
   -webkit-box-flex: 5;
       -ms-flex: 5;
           flex: 5;
 }
 
-.header_branding .navigation_bar .flexible nav ul {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  list-style: none;
+.header_branding .navigation_bar nav .navBar_img {
+  width: 100%;
+  max-width: 100px;
+}
+
+.header_branding .navigation_bar nav ul {
   margin-bottom: 0;
 }
 
-.header_branding .navigation_bar .flexible nav ul li a {
+.header_branding .navigation_bar nav ul li a {
   display: block;
   text-transform: uppercase;
   color: var(--light);
-  padding: 5px 30px;
   text-decoration: none;
   border-bottom: 4px solid transparent;
+  padding: 10px 25px !important;
 }
 
-.header_branding .navigation_bar .flexible nav ul li a:hover {
+.header_branding .navigation_bar nav ul li a:hover {
   border-bottom: 4px solid #DE5B2C;
 }
 
@@ -167,6 +154,12 @@ h1, h2, h3, h4, h5, h6 {
   position: absolute;
   top: 16px;
   left: 18px;
+}
+
+.navbar-toggler span {
+  color: var(--light);
+  font-size: 1.825rem;
+  font-weight: 300;
 }
 
 .story {
@@ -577,5 +570,99 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'Rancho', cursive;
   font-size: 4rem;
   padding: 1rem 0;
+}
+
+@media only screen and (max-width: 1200px) {
+  .header_branding .home_banner div h2::before, .header_branding .home_banner div h2::after {
+    width: 20%;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .header_branding .home_banner div h2::before, .header_branding .home_banner div h2::after {
+    width: 10%;
+  }
+  .story .col-md-6:last-child p:first-child::before, .story .col-md-6:last-child p:first-child::after {
+    width: 10%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .header_branding .home_banner div h1, .header_branding .home_banner div h2 {
+    font-size: 5rem;
+  }
+  .header_branding .home_banner div h2::before {
+    left: -30px;
+  }
+  .header_branding .home_banner div h2::after {
+    right: -55px;
+  }
+  .chefChoice .col-md-6:first-child img {
+    width: 100%;
+    max-width: 100%;
+  }
+  .section3product {
+    padding: 0;
+  }
+  .chefChoice_heading {
+    padding: 2rem 0;
+    padding-bottom: 0;
+  }
+  .chefChoice_heading p {
+    text-align: center;
+  }
+  .chefChoice_heading p::after {
+    top: 13px;
+    left: 58%;
+  }
+  .chefChoice_heading h1 {
+    text-align: center;
+  }
+}
+
+@media only screen and (max-width: 662px) {
+  .header_branding .home_banner div h2 span {
+    padding: 0 10px;
+  }
+  .header_branding .home_banner div h2::before {
+    left: 0;
+  }
+  .header_branding .home_banner div h2::after {
+    right: 0;
+  }
+  .header_branding .home_banner {
+    padding-bottom: 5rem;
+  }
+}
+
+@media only screen and (max-width: 536px) {
+  .header_branding .home_banner div h1, .header_branding .home_banner div h2 {
+    font-size: 60px;
+  }
+  .header_branding .home_banner div h2::after, .header_branding .home_banner div h2::before {
+    display: none;
+  }
+  .header_branding .home_banner {
+    padding-bottom: 1rem;
+  }
+  .social_header {
+    text-align: center;
+  }
+  .social_header_icons {
+    margin: 0 auto;
+  }
+  .myAccunt {
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+@media only screen and (max-width: 443px) {
+  .header_branding .home_banner div h1 {
+    font-size: 40px;
+  }
+  .header_branding .home_banner div h2 span {
+    font-size: 20px;
+  }
 }
 /*# sourceMappingURL=main.css.map */

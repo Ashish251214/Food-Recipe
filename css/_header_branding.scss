@@ -24,6 +24,9 @@
                 padding: 0 3px;
             }
             &:last-child{
+                .myAccount{
+                    float: right;
+                }
                 .social_header_icons{
                     padding-right: 10px;
                     border-right: 1px solid var(--light);
@@ -46,32 +49,29 @@
     // navigation_bar
     .navigation_bar{
         padding: 1rem 0;
-        .flexible{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            .navigation_bar-logo{
-                flex: 1;
-                & img{
-                    width: 100%;
-                    max-width: 80px;
-                }
+        .navigation_bar-logo{
+            flex: 1;
+            & img{
+                width: 100%;
+                max-width: 80px;
             }
-            nav{
-                flex: 5;
-                ul{
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    list-style: none;
-                    margin-bottom: 0;
-                    & li a{
+        }
+        nav{
+            flex: 5;
+            .navBar_img{
+                width: 100%;
+                max-width: 100px;
+            }
+            ul{
+                margin-bottom: 0;
+                & li {
+                    a{
                         display: block;
                         text-transform: uppercase;
                         color: var(--light);
-                        padding: 5px 30px;
                         text-decoration: none;
                         border-bottom: 4px solid transparent;
+                        padding: 10px 25px !important;
                         &:hover{
                             border-bottom: 4px solid $primary;
                         }
@@ -124,4 +124,10 @@
             }
         }
     }
+}
+
+.navbar-toggler span{
+    color: var(--light);
+    font-size: 1.825rem;
+    font-weight: 300;
 }

@@ -30,13 +30,17 @@
                 <div class="row text-white">
                     <div class="col-md-6">
                         <div class="row">
-                            <span><a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i> Chhachhrauli Yamunanagar</a></span>
-                            <span><a href="#"><i class="fa fa-phone" aria-hidden="true"></i> 798838XXXX</a></span>
+                            <div class="col-md-8">
+                                <span><a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i> Chhachhrauli Yamunanagar</a></span>
+                            </div>
+                            <div class="col-md-4">
+                                <span><a href="#"><i class="fa fa-phone" aria-hidden="true"></i> 798838XXXX</a></span>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="row">
-                            <div class="social_header_icons ml-auto">
+                        <div class="row myAccount">
+                            <div class="social_header_icons">
                                 <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                                 <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
                                 <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
@@ -51,24 +55,39 @@
         <!-- navigation -->
         <div class="navigation_bar">
             <div class="container">
-                <div class="flexible">
-                    <div class="navigation_bar-logo">
-                        <a href="#">
-                            <img src="./images/icon_white.svg" alt="mainicon">
-                        </a>
+                <!-- navbar appling -->
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <a class="navbar-brand" href="#"><img class="navBar_img" src="./images/icon_white.svg" alt="mainicon"></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="fa fa-bars"></span>
+                    </button>
+                  
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                      <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                          <a class="nav-link text-light" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link text-light" href="#">about</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="#">reservation</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link text-light" href="#">manu</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link text-light" href="#">contact</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link text-light" href="#"><i class="fa fa-shopping-bag" aria-hidden="true"></i></a>
+                          </li>
+                          <li class="nav-item">
+                            <a href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
+                          </li>
+                      </ul>
                     </div>
-                    <nav>
-                        <ul>
-                            <li><a href="#">home</a></li>
-                            <li><a href="#">about</a></li>
-                            <li><a href="#">reservation</a></li>
-                            <li><a href="#">manu</a></li>
-                            <li><a href="#">contact</a></li>
-                            <li><a href="#"><i class="fa fa-shopping-bag" aria-hidden="true"></i></a></li>
-                            <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
-                        </ul>
-                    </nav>
-                </div>
+                  </nav>
             </div>
         </div>
         <!-- home_banner -->
@@ -103,8 +122,8 @@
     <div class="chefChoice">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-6 pl-0">
-                    <img src="./images/section3product.jpg" alt="section3product">
+                <div class="col-md-6 pl-0 section3product">
+                    <img src="./images/section3product.jpg" alt="section3product" >
                 </div>
                 <div class="col-md-6">
                     <div class="chefChoice_heading">
