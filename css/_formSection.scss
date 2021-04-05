@@ -1,4 +1,10 @@
 .formSection{
+    background: url(../images/home_banner.jpg);
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+    background-repeat: repeat-x;
+    color: var(--light);
     .row{
         h1{
             padding:  1rem 0;
@@ -11,5 +17,20 @@
     .submitBtn{
         background-color: $primary;
         color: var(--light);
+    }
+    .divArea{
+        min-height: 200px;
+        height: auto;
+        width: 100%;
+        background-color: $light_white;
+        margin-bottom: 1rem;
+        border-radius: 5px;
+        input[type='text']{
+            background: none;
+            height: 100%;
+            width: 100%;
+            outline: none;
+            border: none;
+        }
     }
 }
