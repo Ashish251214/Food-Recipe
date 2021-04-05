@@ -9,7 +9,8 @@ let err = document.getElementsByClassName("err");
 let ingreErr = document.getElementsByClassName("ingreErr");
 let addDishData = document.querySelector("#addDishData");
 let addIngredientsData = document.querySelector("#addIngredientsData");
-let finalArray = [],ingreArray = [],getAddIngreObject;
+let finalArray = [],ingreArray = [],cloneArray = [],getAddIngreObject,creatTd,storeTemp,addDishGet;
+let showDataIngredients = document.querySelector("#showDataIngredients");
 // Add Ingredients Data
 addIngredientsData.addEventListener("click",() => {
     event.preventDefault();
@@ -41,8 +42,8 @@ addDishData.addEventListener('click', () => {
             err[1].innerHTML = "Please Enter the image link!";
         }else{
             err[1].innerHTML = "";
-            let storeTemp = getFinalData(enterDish.value,imgLink.value,ingreArray);
-            let addDishGet = localStorage.getItem("addDish");
+            storeTemp = getFinalData(enterDish.value,imgLink.value,ingreArray);
+            addDishGet = localStorage.getItem("addDish");
             console.log(addDishGet);
             if(addDishGet){
                 let parseData = JSON.parse(addDishGet);
@@ -66,3 +67,35 @@ function addIngre(ingreName,qty,unit){
 function getFinalData(dishName,imgLink,Ingredients) {
     return {dishName,imgLink,Ingredients,}
 }
+// it's show time
+function showTime(){
+    addDishGet = localStorage.getItem("addDish");
+    let parseAddDishGet = JSON.parse(addDishGet);
+    for(let m=0;m<parseAddDishGet.length;m++){
+        cloneArray.push(parseAddDishGet[m]);
+    }
+    for(let e=0;e<cloneArray.length;e++){
+        for(let key in cloneArray[e]){
+            if(key == "Ingredients"){
+                for(let data in cloneArray[e][key]){
+                    abc = cloneArray[e][key][data];
+                    createTd = "<tr>";
+                    let counter = 0;
+                    for(let k in abc){
+                        if(counter == 0){
+                            createTd += `<th scope="row">${abc[k]}</th>`;
+                            counter++;
+                        }else{
+                            createTd += `<td>${abc[k]}</td>`;
+                        }
+                    }
+                    createTd += "</tr>";
+                    showDataIngredients.innerHTML += createTd;
+                }
+            }
+        }
+    }
+}
+window.onload = function() {
+    showTime();
+};
