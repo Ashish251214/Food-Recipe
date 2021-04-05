@@ -43,6 +43,7 @@ addDishData.addEventListener('click', () => {
             err[1].innerHTML = "";
             let storeTemp = getFinalData(enterDish.value,imgLink.value,ingreArray);
             let addDishGet = localStorage.getItem("addDish");
+            console.log(addDishGet);
             if(addDishGet){
                 let parseData = JSON.parse(addDishGet);
                 for(let j=0;j<parseData.length;j++){
@@ -50,7 +51,7 @@ addDishData.addEventListener('click', () => {
                 }
                 finalArray.push(storeTemp);
                 localStorage.setItem('addDish',JSON.stringify(finalArray));
-                // finalArray.splice(0,finalArray.length);
+                finalArray.splice(0,finalArray.length);
             }else{
                 localStorage.setItem('addDish',JSON.stringify(storeTemp));
                 console.log("We dont have found any entry of addDish that's why we created");

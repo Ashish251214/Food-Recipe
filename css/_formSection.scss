@@ -1,9 +1,5 @@
 .formSection{
-    background: url(../images/home_banner.jpg);
-    background-position: center;
-    background-size: cover;
-    height: 100vh;
-    background-repeat: repeat-x;
+    background: #ffffff url("../images/home_banner.jpg") no-repeat fixed;
     color: var(--light);
     .row{
         h1{
