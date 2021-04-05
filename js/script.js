@@ -42,45 +42,26 @@ addDishData.addEventListener('click', () => {
         }else{
             err[1].innerHTML = "";
             let storeTemp = getFinalData(enterDish.value,imgLink.value,ingreArray);
-            for (let i = 0; i < localStorage.length; i++) {
-                const key = localStorage.key(i);
-                if(key == "addDish"){
-                    console.log("Yes we have found the entry!");
-                    finalArray.push(JSON.parse(localStorage[key]));
-                    finalArray.push(storeTemp);
-                    localStorage.setItem('addDish',JSON.stringify(finalArray));
-                    finalArray.splice(0,finalArray.length);
-                }else{
-                    localStorage.setItem('addDish',JSON.stringify(storeTemp));
+            let addDishGet = localStorage.getItem("addDish");
+            if(addDishGet){
+                let parseData = JSON.parse(addDishGet);
+                for(let j=0;j<parseData.length;j++){
+                    finalArray.push(parseData[j]);
                 }
+                finalArray.push(storeTemp);
+                localStorage.setItem('addDish',JSON.stringify(finalArray));
+                finalArray.splice(0,finalArray.length);
+            }else{
+                localStorage.setItem('addDish',JSON.stringify(storeTemp));
+                console.log("We dont have found any entry of addDish that's why we created");
             }
             ingreArray.splice(0,ingreArray.length);
         }
     }
 });
-// addIngredients
 function addIngre(ingreName,qty,unit){
-    return {
-        ingreName,
-        qty,
-        unit,
-    }
+    return {ingreName,qty,unit,}
 }
 function getFinalData(dishName,imgLink,Ingredients) {
-    return {
-        dishName,
-        imgLink,
-        Ingredients,
-    }
+    return {dishName,imgLink,Ingredients,}
 }
-
-
-
-// function gettingData() {
-//         for (let i = 0; i < localStorage.length; i++) {
-//             const key = localStorage.key(i);
-//             console.log(`${key}: ${localStorage.getItem(key)}`);
-//         }
-//     }
-
-//     gettingData();
