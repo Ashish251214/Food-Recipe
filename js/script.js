@@ -9,7 +9,7 @@ let err = document.getElementsByClassName("err");
 let ingreErr = document.getElementsByClassName("ingreErr");
 let addDishData = document.querySelector("#addDishData");
 let addIngredientsData = document.querySelector("#addIngredientsData");
-let ingreArray = [];
+let finalArray = [],ingreArray = [],getAddIngreObject;
 // Add Ingredients Data
 addIngredientsData.addEventListener("click",() => {
     event.preventDefault();
@@ -23,14 +23,17 @@ addIngredientsData.addEventListener("click",() => {
         ingreErr[2].innerHTML = "Please Select any Units";
     }else{
         ingreErr[2].innerHTML = "";
-        let getAddIngreObject = addIngre(ingredients.value,quantity.value,units.value);
+        getAddIngreObject = addIngre(ingredients.value,quantity.value,units.value);
         ingreArray.push(getAddIngreObject);
+        console.log(ingreArray);
+        alert("Ingredients Added");
+        ingredients.value = quantity.value = units.value = "";
     }
 });
 // store data in localstorage of Enter Dish
 addDishData.addEventListener('click', () => {   
     event.preventDefault();
-    if(addIngre.length >= 1){
+    if(ingreArray.length >= 1){
         if(enterDish.value == "" || enterDish.value == null){
             err[0].innerHTML = "Please Enter any Dish!";
         }else if(imgLink.value == "" || imgLink.value == null){
@@ -38,8 +41,20 @@ addDishData.addEventListener('click', () => {
             err[1].innerHTML = "Please Enter the image link!";
         }else{
             err[1].innerHTML = "";
-            let temp = createObject(enterDish.value,imgLink.value);
-            // console.log(localStorage.setItem(`${enterDish.value}`,JSON.stringify(temp)));
+            let storeTemp = getFinalData(enterDish.value,imgLink.value,ingreArray);
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if(key == "addDish"){
+                    console.log("Yes we have found the entry!");
+                    finalArray.push(JSON.parse(localStorage[key]));
+                    finalArray.push(storeTemp);
+                    localStorage.setItem('addDish',JSON.stringify(finalArray));
+                    finalArray.splice(0,finalArray.length);
+                }else{
+                    localStorage.setItem('addDish',JSON.stringify(storeTemp));
+                }
+            }
+            ingreArray.splice(0,ingreArray.length);
         }
     }
 });
@@ -51,3 +66,21 @@ function addIngre(ingreName,qty,unit){
         unit,
     }
 }
+function getFinalData(dishName,imgLink,Ingredients) {
+    return {
+        dishName,
+        imgLink,
+        Ingredients,
+    }
+}
+
+
+
+// function gettingData() {
+//         for (let i = 0; i < localStorage.length; i++) {
+//             const key = localStorage.key(i);
+//             console.log(`${key}: ${localStorage.getItem(key)}`);
+//         }
+//     }
+
+//     gettingData();
