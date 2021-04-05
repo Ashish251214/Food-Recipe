@@ -33,45 +33,60 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <form>
+                    <form action="">
+                      <!-- enter ingredients *****************************************-->
+                      <div class="form-group">
+                        <label for="ingredients">Enter Ingredients</label>
+                        <input type="text" class="form-control" aria-describedby="ingrerr" id="ingredients" placeholder="Enter Ingredients">
+                        <small id="ingrerr" class="form-text text-light ingreErr"></small>
+                      </div>
+                      <!-- enter quantity -->
+                      <div class="form-group">
+                        <label class="sr-only" for="ingredients">Enter Quantity</label>
+                        <input type="number" class="form-control" aria-describedby="quantityerr" id="quantity" placeholder="Enter Quantity" min="1" max="10">
+                        <small id="quantityerr" class="form-text text-light ingreErr"></small>
+                      </div>
+                      <!-- enter units -->
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <label class="input-group-text" for="units">Enter Units</label>
+                        </div>
+                        <select class="custom-select" id="units" aria-describedby="uniterr">
+                          <option selected disabled value="">Units</option>
+                          <option value="kg">kg</option>
+                          <option value="l">l</option>
+                          <option value="cup">Cup</option>
+                          <option value="glass">Glass</option>
+                          <option value="Spoon">Spoon</option>
+                        </select>
+                      </div>
+                      <small id="uniterr" class="form-text text-light ingreErr"></small>
+                      <button type="submit" id="addIngredientsData" class="btn submitBtn mt-3 btn-block">Add Ingredients</button>
+                    </form>
+                    <form class="mt-3">
+                      <!-- enter dish -->
                         <div class="form-group">
                           <label for="enterDish">Enter Dish</label>
-                          <input type="text" class="form-control" id="enterDish" placeholder="Enter Dishes">
+                          <input type="text" class="form-control" id="enterDish" aria-describedby="addDisherr" placeholder="Enter Dishes">
+                          <small id="addDisherr" class="form-text text-light err"></small>
                         </div>
+                        <!-- image link -->
                         <div class="form-group">
                           <label for="imgLink">Image Link</label>
-                          <input type="text" class="form-control" id="imgLink" placeholder="Image Link">
+                          <input type="text" class="form-control" aria-describedby="imgerr" id="imgLink" placeholder="Image Link">
+                          <small id="imgerr" class="form-text text-light err"></small>
                         </div>
-                        <!-- start -->
-                        <div class="input-group">
-                          <div class="input-group">
-                            <input type="text" class="form-control" id="ingredients" aria-label="Text input with dropdown button" placeholder="Enter Ingredients">
-                            <div class="input-group-append">
-                              <button class="btn submitBtn dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ingredient Name</button>
-                              <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Kg</a>
-                                <a class="dropdown-item" href="#">l</a>
-                                <a class="dropdown-item" href="#">Cup</a>
-                                <a class="dropdown-item" href="#">Spoon</a>
-                                <a class="dropdown-item" href="#">glass</a>
-                                <!-- class="dropdown-divider" -->
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                          <!-- end -->
-                        <button type="submit" class="btn submitBtn mt-3">Submit</button>
+                        <button type="submit" id="addDishData" class="btn submitBtn btn-block">Finall Submit</button>
                     </form>
                 </div>
                 <div class="col-md-6">
                     <form>
                         <div class="form-group">
                           <label for="selectedItem">Selected Item</label>
-                          <input type="text" class="form-control" id="selectedItem" placeholder="Selected Items">
+                          <input type="text" class="form-control" id="selectedItem" placeholder="Selected Items" disabled>
                         </div>
-                        <div class="divArea">
-                            <input type="text" class="input-group specialinput">
-                        </div>
+                        <label for="showIngredients">Show Ingredients</label>
+                        <div class="divArea" id="showIngredients"></div>
                         <!-- <button type="submit" class="btn submitBtn">Submit</button> -->
                       </form>
                 </div>
@@ -84,30 +99,5 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="./js/slick.min.js"></script>
     <script src="./js/script.js"></script>
-    <script>
-        $('.div_slider').slick({
-        infinite: true,
-        speed: 300,
-        slidesToShow: 4,
-        adaptiveHeight: true,
-        vertical: true
-      });
-    //   testimonial
-    $('.testimonialSlider_pannel').slick({
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        arrows: false,
-        fade: true,
-        asNavFor: '.slider-nav'
-    });
-    $('.testimonialSlider_btn').slick({
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        asNavFor: '.slider-for',
-        dots: true,
-        centerMode: true,
-        focusOnSelect: true
-    });
-    </script>
 </body>
 </html>
