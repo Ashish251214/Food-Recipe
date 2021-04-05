@@ -665,4 +665,17 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 20px;
   }
 }
+
+.formSection .row h1 {
+  padding: 1rem 0;
+  text-align: center;
+  font-family: 'Rancho', cursive;
+  font-size: 4rem;
+  text-transform: capitalize;
+}
+
+.formSection .submitBtn {
+  background-color: #DE5B2C;
+  color: var(--light);
+}
 /*# sourceMappingURL=main.css.map */
