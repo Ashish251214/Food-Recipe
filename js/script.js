@@ -94,6 +94,7 @@ let dltData = (v) => {
 }
 // getalldata
 getAllDishes.addEventListener('click',() => {
+    showAllData.innerHTML = ""; 
     firstForm.style.display = "none";
     secondForm.style.display = "block";
     let getDataLocal = localStorage.getItem('addDish');
@@ -123,9 +124,11 @@ getAllDishes.addEventListener('click',() => {
         row += "</tr>";
         showAllData.innerHTML += row;
     }
+    cloneArray.splice(0,cloneArray.length);
 });
 // goBack
 goBack.addEventListener('click',() => {
+    showAllData.innerHTML = ""; 
     firstForm.style.display = "block";
     secondForm.style.display = "none";
 });
