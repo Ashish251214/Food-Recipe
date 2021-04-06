@@ -666,9 +666,10 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-.addBG {
+.firstForm {
   background: #ffffff url("../images/home_banner.jpg") no-repeat fixed;
   background-size: cover;
+  padding-bottom: 30vh;
 }
 
 .formSection {
@@ -706,13 +707,14 @@ h1, h2, h3, h4, h5, h6 {
   overflow: scroll;
 }
 
-.getAllDishBg {
+.showtimedata {
   background: -webkit-gradient(linear, left top, right top, from(black), color-stop(50%, rgba(0, 0, 0, 0.499335)), to(black)), url(../images/getalldish.jpg);
   background: linear-gradient(90deg, black 0%, rgba(0, 0, 0, 0.499335) 50%, black 100%), url(../images/getalldish.jpg);
   background-attachment: fixed;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  padding-bottom: 51vh;
 }
 
 .showtimedata .row h1 {

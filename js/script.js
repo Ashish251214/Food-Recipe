@@ -12,8 +12,12 @@ let addIngredientsData = document.querySelector("#addIngredientsData");
 let finalArray = [],ingreArray = [],cloneArray = [],getAddIngreObject,creatTd,storeTemp,addDishGet;
 let showDataIngredients = document.querySelector("#showDataIngredients");
 let getAllDishes = document.querySelector("#getAllDishes");
+let firstForm = document.querySelector(".firstForm");
+let secondForm = document.querySelector(".secondForm");
+let goBack = document.querySelector(".goBack");
+let showAllData = document.querySelector("#showAllData");
 // Add Ingredients Data
-addIngredientsData.addEventListener("click",() => {
+function getIngre(){
     event.preventDefault();
     if(ingredients.value == "" || ingredients.value == null){
         ingreErr[0].innerHTML = "Please Enter Ingredients";
@@ -31,7 +35,7 @@ addIngredientsData.addEventListener("click",() => {
         // It's Show time
         showTime();
     }
-});
+}
 // show time function
 let showTime = () => {
     showDataIngredients.innerHTML = "";
@@ -46,7 +50,7 @@ let showTime = () => {
     showDataIngredients.innerHTML += row;
 }
 // store data in localstorage of Enter Dish
-addDishData.addEventListener('click', () => {   
+function finalSubmit() {   
     event.preventDefault();
     if(ingreArray.length >= 1){
         if(enterDish.value == "" || enterDish.value == null){
@@ -77,7 +81,7 @@ addDishData.addEventListener('click', () => {
             showDataIngredients.innerHTML = "";
         }
     }
-});
+}
 function addIngre(ingreName,qty,unit){
     return {ingreName,qty,unit,}
 }
@@ -89,12 +93,39 @@ let dltData = (v) => {
     event.preventDefault();
 }
 // getalldata
-getAllDishes.addEventListener('click', () => {
-    addDishGet = localStorage.getItem("addDish");
-    let parseAddDishGet = JSON.parse(addDishGet);
-    for(let m=0;m<parseAddDishGet.length;m++){
-        cloneArray.push(parseAddDishGet[m]);
+getAllDishes.addEventListener('click',() => {
+    firstForm.style.display = "none";
+    secondForm.style.display = "block";
+    let getDataLocal = localStorage.getItem('addDish');
+    let parseGetDataLocal = JSON.parse(getDataLocal);
+    for(let m=0;m<parseGetDataLocal.length;m++){
+        cloneArray.push(parseGetDataLocal[m]);
     }
-    let lastIndex = cloneArray.length-1;
-    let lastIndexIngre = cloneArray[lastIndex].Ingredients;
+    // putting data into their field
+    let row,ingreTemp;
+    for(let i=0;i<cloneArray.length;i++){
+        let tempData = cloneArray[i];
+        row = "<tr>";
+        row += `  
+            <td>${i+1}</td>  
+            <td>${tempData.dishName}</td>        
+            <td>${tempData.imgLink}</td>
+        `;
+        ingreTemp = tempData.Ingredients;
+        row += "<td><ol>";
+        for(let j=0;j<ingreTemp.length;j++){
+            row += `<li>${ingreTemp[j].ingreName}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${ingreTemp[j].qty}${ingreTemp[j].unit}</li>`;  
+        }
+        row += `</ol></td>  
+            <td><button class="btn btn-success" onclick='editBtn${i}'>Edit</button></td>        
+            <td><button class="btn btn-danger onclick='dltBtn${i}'">Delete</button></td>
+        `;
+        row += "</tr>";
+        showAllData.innerHTML += row;
+    }
+});
+// goBack
+goBack.addEventListener('click',() => {
+    firstForm.style.display = "block";
+    secondForm.style.display = "none";
 });

@@ -22,9 +22,10 @@
     <!-- custom css file -->
     <link rel="stylesheet" href="./css/main.css">
 </head>
-<body class="addBG">
+<body>
     <!-- form -->
-    <div class="formSection">
+    <div class="firstForm">
+      <div class="formSection">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -61,7 +62,7 @@
                         </select>
                       </div>
                       <small id="uniterr" class="form-text text-light ingreErr"></small>
-                      <button type="submit" id="addIngredientsData" class="btn submitBtn mt-3 btn-block">Add Ingredients</button>
+                      <button type="submit" id="addIngredientsData" onclick="getIngre()" class="btn submitBtn mt-3 btn-block">Add Ingredients</button>
                     </form>
                     <form class="mt-3 formClass">
                       <!-- enter dish -->
@@ -76,7 +77,7 @@
                           <input type="text" class="form-control" aria-describedby="imgerr" id="imgLink" placeholder="Image Link">
                           <small id="imgerr" class="form-text text-light err"></small>
                         </div>
-                        <button type="submit" id="addDishData" class="btn submitBtn btn-block">Finall Submit</button>
+                        <button type="submit" id="addDishData" onclick="finalSubmit()" class="btn submitBtn btn-block">Finall Submit</button>
                     </form>
                 </div>
                 <div class="col-md-6">
@@ -109,10 +110,56 @@
             </div>
             <div class="row mt-3">
               <div class="col-12">
-                <a href="./getAllDishes.html"><button class="btn btn-block submitBtn" id="getAllDishes">Get All Dishes</button></a>
+                <button class="btn btn-block submitBtn" id="getAllDishes">Get All Dishes</button>
               </div>
             </div>
         </div>
+      </div>
+    </div>
+    <!-- second page all dishes show -->
+    <div class="secondForm" style="display: none;">
+      <div class="showtimedata">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-2">
+                    <button class="btn submitBtn goBack mt-4">Go back</button>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1>all dishes</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <form>
+                        <div class="form-group">
+                            <input type="search" class="form-control" id="searchItemsHere" placeholder="Search..">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <table class="table table-hover table-dark">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Dish Name</th>
+                            <th scope="col">Image Link</th>
+                            <th scope="col">Ingredients</th>
+                            <th scope="col">Edit</th>
+                            <th scope="col">Delete</th>
+                          </tr>
+                        </thead>
+                        <tbody id="showAllData"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+      </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

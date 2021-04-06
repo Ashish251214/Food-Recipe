@@ -1,11 +1,10 @@
-.getAllDishBg{
+.showtimedata{
     background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.49933476808692223) 50%, rgba(0,0,0,1) 100%),url(../images/getalldish.jpg);
     background-attachment: fixed;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-}
-.showtimedata{
+    padding-bottom: 51vh;
     .row{
         h1{
             padding:  1rem 0;
