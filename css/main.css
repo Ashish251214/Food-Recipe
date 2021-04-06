@@ -666,8 +666,12 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-.formSection {
+.addBG {
   background: #ffffff url("../images/home_banner.jpg") no-repeat fixed;
+  background-size: cover;
+}
+
+.formSection {
   color: var(--light);
 }
 
@@ -694,5 +698,24 @@ h1, h2, h3, h4, h5, h6 {
 .formSection .showDataIngredients {
   height: 200px;
   overflow: scroll;
+}
+
+.getAllDishBg {
+  background: -webkit-gradient(linear, left top, right top, from(black), color-stop(50%, rgba(0, 0, 0, 0.499335)), to(black)), url(../images/getalldish.jpg);
+  background: linear-gradient(90deg, black 0%, rgba(0, 0, 0, 0.499335) 50%, black 100%), url(../images/getalldish.jpg);
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.showtimedata .row h1 {
+  padding: 1rem 0;
+  font-family: 'Rancho', cursive;
+  font-size: 4rem;
+  text-transform: capitalize;
+  color: var(--light);
+  display: block;
+  text-align: center;
 }
 /*# sourceMappingURL=main.css.map */
