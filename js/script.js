@@ -26,7 +26,6 @@ addIngredientsData.addEventListener("click",() => {
         ingreErr[2].innerHTML = "";
         getAddIngreObject = addIngre(ingredients.value,quantity.value,units.value);
         ingreArray.push(getAddIngreObject);
-        console.log(ingreArray);
         alert("Ingredients Added");
         ingredients.value = quantity.value = units.value = "";
     }
@@ -44,7 +43,6 @@ addDishData.addEventListener('click', () => {
             err[1].innerHTML = "";
             storeTemp = getFinalData(enterDish.value,imgLink.value,ingreArray);
             addDishGet = localStorage.getItem("addDish");
-            console.log(addDishGet);
             if(addDishGet){
                 let parseData = JSON.parse(addDishGet);
                 for(let j=0;j<parseData.length;j++){
@@ -81,10 +79,10 @@ addDishData.addEventListener('click', () => {
                                 }
                             }
                             createTd += `<td>
-                                            <button class='btn btn-success'>Edit</button>
+                                            <button class='btn btn-success editBtn'>Edit</button>
                                         </td>`;
                             createTd += `<td>
-                                            <button class='btn btn-danger'>X</button>
+                                            <button class='btn btn-danger dltBtn'>X</button>
                                         </td>`;
                             createTd += "</tr>";
                             showDataIngredients.innerHTML += createTd;
@@ -92,6 +90,15 @@ addDishData.addEventListener('click', () => {
                     }
                 }
             }
+            // delete work station
+            let dltBtn = document.getElementsByClassName("dltBtn");
+            for(let g = 0;g<dltBtn.length;g++){
+                dltBtn[g].addEventListener('click', function(){
+                    event.preventDefault();
+                    this.parentNode.parentNode.remove();
+                });
+            }
+            // edit the work station
         }
     }
 });
@@ -101,4 +108,3 @@ function addIngre(ingreName,qty,unit){
 function getFinalData(dishName,imgLink,Ingredients) {
     return {dishName,imgLink,Ingredients,}
 }
-// delete work station

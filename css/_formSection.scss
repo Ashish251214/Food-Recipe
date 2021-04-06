@@ -19,9 +19,14 @@
     }
     .divArea{
         width: 100%;
+        height: 300px;
+        overflow-y: scroll;
         background-color: $light_white;
         margin-bottom: 1rem;
         border-radius: 5px;
+        ::-webkit-scrollbar {
+            width: 0px;
+          }
     }
     .showDataIngredients{
         height: 200px;

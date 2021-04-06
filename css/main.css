@@ -690,9 +690,15 @@ h1, h2, h3, h4, h5, h6 {
 
 .formSection .divArea {
   width: 100%;
+  height: 300px;
+  overflow-y: scroll;
   background-color: #f2f2f2;
   margin-bottom: 1rem;
   border-radius: 5px;
+}
+
+.formSection .divArea ::-webkit-scrollbar {
+  width: 0px;
 }
 
 .formSection .showDataIngredients {
