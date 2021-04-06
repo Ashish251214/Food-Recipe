@@ -22,7 +22,7 @@
     <!-- custom css file -->
     <link rel="stylesheet" href="./css/main.css">
 </head>
-<body class="addDishBody">
+<body>
     <!-- form -->
     <div class="formSection">
         <div class="container">
@@ -82,8 +82,8 @@
                 <div class="col-md-6">
                     <form>
                         <div class="form-group">
-                          <label for="selectedItem">Selected Item</label>
-                          <input type="text" class="form-control" id="selectedItem" placeholder="Selected Items" disabled>
+                          <label for="selectedItem">Your Dish</label>
+                          <input type="text" class="form-control" id="selectedItem" placeholder="Your Dish" disabled>
                         </div>
                         <label for="showIngredients">Show Ingredients</label>
                         <div class="divArea" id="showIngredients">
@@ -95,6 +95,8 @@
                                 <th scope="col">Ingredient Name</th>
                                 <th scope="col">Quantity</th>
                                 <th scope="col">Unit</th>
+                                <th scope="col">Edit</th>
+                                <th scope="col">Delete</th>
                               </tr>
                             </thead> <!--<th scope="row">1</th>-->
                             <tbody id="showDataIngredients">  

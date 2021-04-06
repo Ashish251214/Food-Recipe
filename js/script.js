@@ -58,6 +58,40 @@ addDishData.addEventListener('click', () => {
                 console.log("We dont have found any entry of addDish that's why we created");
             }
             ingreArray.splice(0,ingreArray.length);
+            // it's show time
+            showDataIngredients.innerHTML = "";
+            addDishGet = localStorage.getItem("addDish");
+            let parseAddDishGet = JSON.parse(addDishGet);
+            for(let m=0;m<parseAddDishGet.length;m++){
+                cloneArray.push(parseAddDishGet[m]);
+            }
+            for(let e=0;e<cloneArray.length;e++){
+                for(let key in cloneArray[e]){
+                    if(key == "Ingredients"){
+                        for(let data in cloneArray[e][key]){
+                            abc = cloneArray[e][key][data];
+                            createTd = "<tr>";
+                            let counter = 0;
+                            for(let k in abc){
+                                if(counter == 0){
+                                    createTd += `<th scope="row">${abc[k]}</th>`;
+                                    counter++;
+                                }else{
+                                    createTd += `<td>${abc[k]}</td>`;
+                                }
+                            }
+                            createTd += `<td>
+                                            <button class='btn btn-success'>Edit</button>
+                                        </td>`;
+                            createTd += `<td>
+                                            <button class='btn btn-danger'>X</button>
+                                        </td>`;
+                            createTd += "</tr>";
+                            showDataIngredients.innerHTML += createTd;
+                        }
+                    }
+                }
+            }
         }
     }
 });
@@ -67,35 +101,3 @@ function addIngre(ingreName,qty,unit){
 function getFinalData(dishName,imgLink,Ingredients) {
     return {dishName,imgLink,Ingredients,}
 }
-// it's show time
-function showTime(){
-    addDishGet = localStorage.getItem("addDish");
-    let parseAddDishGet = JSON.parse(addDishGet);
-    for(let m=0;m<parseAddDishGet.length;m++){
-        cloneArray.push(parseAddDishGet[m]);
-    }
-    for(let e=0;e<cloneArray.length;e++){
-        for(let key in cloneArray[e]){
-            if(key == "Ingredients"){
-                for(let data in cloneArray[e][key]){
-                    abc = cloneArray[e][key][data];
-                    createTd = "<tr>";
-                    let counter = 0;
-                    for(let k in abc){
-                        if(counter == 0){
-                            createTd += `<th scope="row">${abc[k]}</th>`;
-                            counter++;
-                        }else{
-                            createTd += `<td>${abc[k]}</td>`;
-                        }
-                    }
-                    createTd += "</tr>";
-                    showDataIngredients.innerHTML += createTd;
-                }
-            }
-        }
-    }
-}
-window.onload = function() {
-    showTime();
-};
