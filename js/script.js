@@ -11,6 +11,7 @@ let addDishData = document.querySelector("#addDishData");
 let addIngredientsData = document.querySelector("#addIngredientsData");
 let finalArray = [],ingreArray = [],cloneArray = [],getAddIngreObject,creatTd,storeTemp,addDishGet;
 let showDataIngredients = document.querySelector("#showDataIngredients");
+let getAllDishes = document.querySelector("#getAllDishes");
 // Add Ingredients Data
 addIngredientsData.addEventListener("click",() => {
     event.preventDefault();
@@ -26,10 +27,24 @@ addIngredientsData.addEventListener("click",() => {
         ingreErr[2].innerHTML = "";
         getAddIngreObject = addIngre(ingredients.value,quantity.value,units.value);
         ingreArray.push(getAddIngreObject);
-        alert("Ingredients Added");
         ingredients.value = quantity.value = units.value = "";
+        // It's Show time
+        showTime();
     }
 });
+// show time function
+let showTime = () => {
+    showDataIngredients.innerHTML = "";
+    let row = "";
+    for(let i = 0;i<ingreArray.length;i++){
+        row+=`<tr><td>${i+1}</td>
+            <td>${ingreArray[i].ingreName}</td>
+            <td>${ingreArray[i].qty}${ingreArray[i].unit}</td>
+            <td><input type="button" class='btn btn-warning' value="Edit"/></td>
+            <td><input type="button" class='btn btn-danger' value="Delete" onclick="dltData(${i})"/></td></tr>`;
+    }
+    showDataIngredients.innerHTML += row;
+}
 // store data in localstorage of Enter Dish
 addDishData.addEventListener('click', () => {   
     event.preventDefault();
@@ -51,54 +66,15 @@ addDishData.addEventListener('click', () => {
                 finalArray.push(storeTemp);
                 localStorage.setItem('addDish',JSON.stringify(finalArray));
                 finalArray.splice(0,finalArray.length);
+                alert("Data Stored");
             }else{
                 localStorage.setItem('addDish',JSON.stringify(storeTemp));
+                alert("Data Stored");
                 console.log("We dont have found any entry of addDish that's why we created");
             }
             ingreArray.splice(0,ingreArray.length);
-            // it's show time
+            enterDish.value = imgLink.value = "";
             showDataIngredients.innerHTML = "";
-            addDishGet = localStorage.getItem("addDish");
-            let parseAddDishGet = JSON.parse(addDishGet);
-            for(let m=0;m<parseAddDishGet.length;m++){
-                cloneArray.push(parseAddDishGet[m]);
-            }
-            for(let e=0;e<cloneArray.length;e++){
-                for(let key in cloneArray[e]){
-                    if(key == "Ingredients"){
-                        for(let data in cloneArray[e][key]){
-                            abc = cloneArray[e][key][data];
-                            createTd = "<tr>";
-                            let counter = 0;
-                            for(let k in abc){
-                                if(counter == 0){
-                                    createTd += `<th scope="row">${abc[k]}</th>`;
-                                    counter++;
-                                }else{
-                                    createTd += `<td>${abc[k]}</td>`;
-                                }
-                            }
-                            createTd += `<td>
-                                            <button class='btn btn-success editBtn'>Edit</button>
-                                        </td>`;
-                            createTd += `<td>
-                                            <button class='btn btn-danger dltBtn'>X</button>
-                                        </td>`;
-                            createTd += "</tr>";
-                            showDataIngredients.innerHTML += createTd;
-                        }
-                    }
-                }
-            }
-            // delete work station
-            let dltBtn = document.getElementsByClassName("dltBtn");
-            for(let g = 0;g<dltBtn.length;g++){
-                dltBtn[g].addEventListener('click', function(){
-                    event.preventDefault();
-                    this.parentNode.parentNode.remove();
-                });
-            }
-            // edit the work station
         }
     }
 });
@@ -108,3 +84,17 @@ function addIngre(ingreName,qty,unit){
 function getFinalData(dishName,imgLink,Ingredients) {
     return {dishName,imgLink,Ingredients,}
 }
+// delete work station work
+let dltData = (v) => {
+    event.preventDefault();
+}
+// getalldata
+getAllDishes.addEventListener('click', () => {
+    addDishGet = localStorage.getItem("addDish");
+    let parseAddDishGet = JSON.parse(addDishGet);
+    for(let m=0;m<parseAddDishGet.length;m++){
+        cloneArray.push(parseAddDishGet[m]);
+    }
+    let lastIndex = cloneArray.length-1;
+    let lastIndexIngre = cloneArray[lastIndex].Ingredients;
+});
