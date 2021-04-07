@@ -167,11 +167,13 @@ goBack.addEventListener('click',() => {
 });
 // dltBtn delete work station
 let dltBtn = (v) => {
-    alert(v+1);
+    let parseGetDataLocal = JSON.parse(localStorage.getItem('addDish'));
+    console.log(parseGetDataLocal);
 }
 // edit complete Work station
 let editBtn = (v) => {
-    alert(v+1);
+    let parseGetDataLocal = JSON.parse(localStorage.getItem('addDish'));
+    console.log(parseGetDataLocal);
 }
 // clearAllData from localStorage
 let clearAllData = () => {
