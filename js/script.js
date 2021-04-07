@@ -20,6 +20,7 @@ let showAllData = document.querySelector("#showAllData");
 let searchItemsHere = document.querySelector("#searchItemsHere");
 let updateIngre = document.querySelector("#updateIngre");
 let updateDishData = document.querySelector("#updateDishData");
+let finalUpdateIngre =document.querySelector("#finalUpdateIngre");
 // Add Ingredients Data
 function getIngre(){
     event.preventDefault();
@@ -202,28 +203,62 @@ let editBtn = (v) => {
     foodRecipe.value = getFoodRecipe;
     selectedItem.value = "Dish Name: " + getDishName;
     setIngredients = clonningArray[v].Ingredients;
+    // ingredients
     for(k=0;k<setIngredients.length;k++){
         editIngreArray.push(setIngredients[k]);
     }
     // to show data
     finalShowData();
-    editIngreArray.splice(0,editIngreArray.length);
     firstForm.style.display = updateDishData.style.display= "block";
     secondForm.style.display = addDishData.style.display = "none";
 }
+// finall Update Button working here 
 updateDishData.addEventListener('click',() => {
     event.preventDefault();
     let updateEnterDish = enterDish.value;
     let updateImgLink = imgLink.value;
     let updateFoodRecipe = foodRecipe.value;
+    // editIngreArray most updated array elemt
+    let makingObj = getFinalData(updateEnterDish,updateImgLink,updateFoodRecipe,editIngreArray);
+    localStorage.setItem('addDish',JSON.stringify(finalArray));
+    alert("You'r Data has been updated");
 });
+// final delete data
 let finalDlt = (v) => {
     event.preventDefault();
+    console.log(editIngreArray , "Before Delete");
+    console.log("From: ", v, "Delete 1");
     editIngreArray.splice(v,1);
+    console.log(editIngreArray, " After Delete");
     finalShowData();
 }
+// final edit data
+let getVvalue,storeDataTemp;
+let finalEdit = (v) => {
+    event.preventDefault();
+    ingredients.value = editIngreArray[v].ingreName;
+    quantity.value = editIngreArray[v].qty;
+    units.value = editIngreArray[v].unit;
+    addIngredientsData.style.display = "none";
+    finalUpdateIngre.style.display = "block";
+    getVvalue = v;
+}
+finalUpdateIngre.addEventListener('click',() => {
+    event.preventDefault();
+    console.log(getVvalue);
+    storeDataTemp = addIngre(ingredients.value,quantity.value,units.value);
+    console.log(storeDataTemp , "We got this and val is: ",getVvalue);
+    editIngreArray.splice(getVvalue,1,storeDataTemp);
+    addIngredientsData.style.display = "block";
+    finalUpdateIngre.style.display = "none";
+    ingredients.value = quantity.value = units.value = "";
+    finalShowData();
+});
+// final data show into their filed
 let finalShowData = () => {
     let row = "";
+    showDataIngredients.innerHTML = "";
+    console.log(editIngreArray , "Reachec in finalShowData");
     for(let i = 0;i<editIngreArray.length;i++){
         row+=`<tr><td>${i+1}</td>
             <td>${editIngreArray[i].ingreName}</td>
