@@ -20,7 +20,8 @@ let showAllData = document.querySelector("#showAllData");
 let searchItemsHere = document.querySelector("#searchItemsHere");
 let updateIngre = document.querySelector("#updateIngre");
 let updateDishData = document.querySelector("#updateDishData");
-let finalUpdateIngre =document.querySelector("#finalUpdateIngre");
+let finalUpdateIngre = document.querySelector("#finalUpdateIngre");
+let addmoreIngre = document.querySelector("#addmoreIngre");
 // Add Ingredients Data
 function getIngre(){
     event.preventDefault();
@@ -190,6 +191,8 @@ let dltBtn = (v) => {
 let setIngredients,setVIndex,editIngreArray = [],clonningArray=[],getDishName,getimgLink,getFoodRecipe;
 let editBtn = (v) => {
     setVIndex = v;
+    addmoreIngre.style.display = "block";
+    addIngredientsData.style.display = "none";
     let parseGetDataLocal = JSON.parse(localStorage.getItem('addDish'));
     for(let m=0;m<parseGetDataLocal.length;m++){
         clonningArray.push(parseGetDataLocal[m]);
@@ -218,10 +221,13 @@ updateDishData.addEventListener('click',() => {
     let updateEnterDish = enterDish.value;
     let updateImgLink = imgLink.value;
     let updateFoodRecipe = foodRecipe.value;
-    // editIngreArray most updated array elemt
     let makingObj = getFinalData(updateEnterDish,updateImgLink,updateFoodRecipe,editIngreArray);
-    localStorage.setItem('addDish',JSON.stringify(finalArray));
+    clonningArray.splice(setVIndex,1,makingObj);
+    localStorage.setItem('addDish',JSON.stringify(clonningArray));
     alert("You'r Data has been updated");
+    addmoreIngre.style.display = "none";
+    addIngredientsData.style.display = "block";
+    enterDish.value = imgLink.value = foodRecipe.value = showDataIngredients.innerHTML = "";
 });
 // final delete data
 let finalDlt = (v) => {
@@ -254,6 +260,26 @@ finalUpdateIngre.addEventListener('click',() => {
     ingredients.value = quantity.value = units.value = "";
     finalShowData();
 });
+// add more items
+addmoreIngre.addEventListener('click', () => {
+    // editIngreArray
+    event.preventDefault();
+    if(ingredients.value == "" || ingredients.value == null){
+        ingreErr[0].innerHTML = "Please Enter Ingredients";
+    }else if(quantity.value == "" || quantity.value == null){
+        ingreErr[0].innerHTML = "";
+        ingreErr[1].innerHTML = "Please Enter The Quantity of Ingredients";
+    }else if(units.value == "" || units.value == null){
+        ingreErr[1].innerHTML = "";
+        ingreErr[2].innerHTML = "Please Select any Units";
+    }else{
+        ingreErr[2].innerHTML = "";
+        let storeTemp = addIngre(ingredients.value,quantity.value,units.value);
+        editIngreArray.push(storeTemp);
+        ingredients.value = quantity.value = units.value = "";
+        finalShowData();
+    }
+});
 // final data show into their filed
 let finalShowData = () => {
     let row = "";
@@ -279,4 +305,3 @@ let clearAllData = () => {
         }
     }
 }
-// search button
