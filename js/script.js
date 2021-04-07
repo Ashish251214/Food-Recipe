@@ -125,38 +125,63 @@ getAllDishes.addEventListener('click',() => {
     showAllData.innerHTML = ""; 
     firstForm.style.display = "none";
     secondForm.style.display = "block";
-    let getDataLocal = localStorage.getItem('addDish');
-    let parseGetDataLocal = JSON.parse(getDataLocal);
-    for(let m=0;m<parseGetDataLocal.length;m++){
-        cloneArray.push(parseGetDataLocal[m]);
-    }
-    // putting data into their field
-    let row,ingreTemp;
-    for(let i=0;i<cloneArray.length;i++){
-        let tempData = cloneArray[i];
-        row = "<tr>";
-        row += `  
-            <td>${i+1}</td>  
-            <td>${tempData.dishName}</td>        
-            <td>${tempData.imgLink}</td>
-        `;
-        ingreTemp = tempData.Ingredients;
-        row += "<td><ol>";
-        for(let j=0;j<ingreTemp.length;j++){
-            row += `<li>${ingreTemp[j].ingreName}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${ingreTemp[j].qty}${ingreTemp[j].unit}</li>`;  
-        }
-        row += `</ol></td>  
-            <td><button class="btn btn-success" onclick='editBtn${i}'>Edit</button></td>        
-            <td><button class="btn btn-danger onclick='dltBtn${i}'">Delete</button></td>
-        `;
-        row += "</tr>";
-        showAllData.innerHTML += row;
-    }
-    cloneArray.splice(0,cloneArray.length);
+    getAllDataLocalStorage();
 });
+let getAllDataLocalStorage = () => {
+    showAllData.innerHTML = ""; 
+    let parseGetDataLocal = JSON.parse(localStorage.getItem('addDish'));
+    if(parseGetDataLocal != null){
+        for(let m=0;m<parseGetDataLocal.length;m++){
+            cloneArray.push(parseGetDataLocal[m]);
+        }
+        // putting data into their field
+        let row,ingreTemp;
+        for(let i=0;i<cloneArray.length;i++){
+            let tempData = cloneArray[i];
+            row = "<tr>";
+            row += `  
+                <td>${i+1}</td>  
+                <td>${tempData.dishName}</td>        
+                <td>${tempData.imgLink}</td>
+            `;
+            ingreTemp = tempData.Ingredients;
+            row += "<td><ol>";
+            for(let j=0;j<ingreTemp.length;j++){
+                row += `<li>${ingreTemp[j].ingreName}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${ingreTemp[j].qty}${ingreTemp[j].unit}</li>`;  
+            }
+            row += `</ol></td>  
+                <td><button class="btn btn-success" onclick='editBtn(${i})'>Edit</button></td>        
+                <td><button class="btn btn-danger" onclick='dltBtn(${i})'>Delete</button></td>
+            `;
+            row += "</tr>";
+            showAllData.innerHTML += row;
+        }
+        cloneArray.splice(0,cloneArray.length);
+    }
+}
 // goBack
 goBack.addEventListener('click',() => {
     showAllData.innerHTML = ""; 
     firstForm.style.display = "block";
     secondForm.style.display = "none";
 });
+// dltBtn delete work station
+let dltBtn = (v) => {
+    alert(v+1);
+}
+// edit complete Work station
+let editBtn = (v) => {
+    alert(v+1);
+}
+// clearAllData from localStorage
+let clearAllData = () => {
+    let localData = JSON.parse(localStorage.getItem('addDish'));
+    let isTrue = confirm("Do you want to clear all data");
+    if(localData.length >= 1){
+        if(isTrue){
+            localStorage.clear();
+            getAllDataLocalStorage();
+        }
+    }
+}
+// search button
