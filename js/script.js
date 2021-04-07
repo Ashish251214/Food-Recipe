@@ -16,6 +16,8 @@ let firstForm = document.querySelector(".firstForm");
 let secondForm = document.querySelector(".secondForm");
 let goBack = document.querySelector(".goBack");
 let showAllData = document.querySelector("#showAllData");
+let searchItemsHere = document.querySelector("#searchItemsHere");
+let updateIngre = document.querySelector("#updateIngre");
 // Add Ingredients Data
 function getIngre(){
     event.preventDefault();
@@ -44,11 +46,41 @@ let showTime = () => {
         row+=`<tr><td>${i+1}</td>
             <td>${ingreArray[i].ingreName}</td>
             <td>${ingreArray[i].qty}${ingreArray[i].unit}</td>
-            <td><input type="button" class='btn btn-warning' value="Edit"/></td>
+            <td><input type="button" class='btn btn-warning' value="Edit" onclick="editData(${i})"/></td>
             <td><input type="button" class='btn btn-danger' value="Delete" onclick="dltData(${i})"/></td></tr>`;
     }
     showDataIngredients.innerHTML += row;
 }
+// dltData
+// delete work station work
+let dltData = (v) => {
+    event.preventDefault();
+    ingreArray.splice(v,1);
+    showTime();
+}
+// editdata
+let makeData;
+let indexValue;
+let editData = (v) => {
+    // setting the values into filed from array
+    ingredients.value = ingreArray[v].ingreName;
+    quantity.value = ingreArray[v].qty;
+    units.value = ingreArray[v].unit;
+    addIngredientsData.style.display = "none";
+    updateIngre.style.display = "block";
+    indexValue = v;
+}
+updateIngre.addEventListener('click',() => {
+    event.preventDefault();
+    console.log(indexValue);
+    makeData = addIngre(ingredients.value,quantity.value,units.value);
+    console.log(makeData , "We got this and val is: ",indexValue);
+    ingreArray.splice(indexValue,1,makeData);
+    addIngredientsData.style.display = "block";
+    updateIngre.style.display = "none";
+    ingredients.value = quantity.value = units.value = "";
+    showTime();
+});
 // store data in localstorage of Enter Dish
 function finalSubmit() {   
     event.preventDefault();
@@ -87,10 +119,6 @@ function addIngre(ingreName,qty,unit){
 }
 function getFinalData(dishName,imgLink,Ingredients) {
     return {dishName,imgLink,Ingredients,}
-}
-// delete work station work
-let dltData = (v) => {
-    event.preventDefault();
 }
 // getalldata
 getAllDishes.addEventListener('click',() => {
