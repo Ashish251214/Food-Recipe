@@ -19,6 +19,7 @@ let goBack = document.querySelector(".goBack");
 let showAllData = document.querySelector("#showAllData");
 let searchItemsHere = document.querySelector("#searchItemsHere");
 let updateIngre = document.querySelector("#updateIngre");
+let updateDishData = document.querySelector("#updateDishData");
 // Add Ingredients Data
 function getIngre(){
     event.preventDefault();
@@ -98,7 +99,7 @@ function finalSubmit() {
             err[2].innerHTML = "";
             storeTemp = getFinalData(enterDish.value,imgLink.value,foodRecipe.value,ingreArray);
             addDishGet = localStorage.getItem("addDish");
-            if(addDishGet){
+            if(addDishGet != null){
                 let parseData = JSON.parse(addDishGet);
                 for(let j=0;j<parseData.length;j++){
                     finalArray.push(parseData[j]);
@@ -108,9 +109,11 @@ function finalSubmit() {
                 finalArray.splice(0,finalArray.length);
                 alert("Data Stored");
             }else{
-                localStorage.setItem('addDish',JSON.stringify(storeTemp));
+                finalArray.push(storeTemp);
+                localStorage.setItem('addDish',JSON.stringify(finalArray));
                 alert("Data Stored");
                 console.log("We dont have found any entry of addDish that's why we created");
+                finalArray.splice(0,finalArray.length);
             }
             ingreArray.splice(0,ingreArray.length);
             enterDish.value = imgLink.value = foodRecipe.value = "";
@@ -152,7 +155,7 @@ let getAllDataLocalStorage = () => {
             ingreTemp = tempData.Ingredients;
             row += "<td><ol>";
             for(let j=0;j<ingreTemp.length;j++){
-                row += `<li>${ingreTemp[j].ingreName}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${ingreTemp[j].qty}${ingreTemp[j].unit}</li>`;  
+                row += `<li>&nbsp;${ingreTemp[j].ingreName}&nbsp;&nbsp;${ingreTemp[j].qty}&nbsp;&nbsp;${ingreTemp[j].unit}</li>`;  
             }
             row += `</ol></td>  
                 <td><button class="btn btn-success" onclick='editBtn(${i})'>Edit</button></td>        
@@ -183,29 +186,52 @@ let dltBtn = (v) => {
     makeArray.splice(0,makeArray.length);
 }
 // edit complete Work station
+let setIngredients,setVIndex,editIngreArray = [],clonningArray=[],getDishName,getimgLink,getFoodRecipe;
 let editBtn = (v) => {
-    let cloneIngreArray = [],clonningArray=[];
+    setVIndex = v;
     let parseGetDataLocal = JSON.parse(localStorage.getItem('addDish'));
     for(let m=0;m<parseGetDataLocal.length;m++){
         clonningArray.push(parseGetDataLocal[m]);
     }
-    let getDishName = clonningArray[v].dishName;
-    let getimgLink = clonningArray[v].imgLink;
+    getDishName = clonningArray[v].dishName;
+    getimgLink = clonningArray[v].imgLink;
+    getFoodRecipe = clonningArray[v].foodRecipe;
+    // print value into their fields
+    enterDish.value = getDishName;
+    imgLink.value = getimgLink;
+    foodRecipe.value = getFoodRecipe;
     selectedItem.value = "Dish Name: " + getDishName;
-    let setIngredients = clonningArray[v].Ingredients;
-    console.log(setIngredients, "This is the array which i am going to use");
-    // array of ingredients
+    setIngredients = clonningArray[v].Ingredients;
+    for(k=0;k<setIngredients.length;k++){
+        editIngreArray.push(setIngredients[k]);
+    }
+    // to show data
+    finalShowData();
+    editIngreArray.splice(0,editIngreArray.length);
+    firstForm.style.display = updateDishData.style.display= "block";
+    secondForm.style.display = addDishData.style.display = "none";
+}
+updateDishData.addEventListener('click',() => {
+    event.preventDefault();
+    let updateEnterDish = enterDish.value;
+    let updateImgLink = imgLink.value;
+    let updateFoodRecipe = foodRecipe.value;
+});
+let finalDlt = (v) => {
+    event.preventDefault();
+    editIngreArray.splice(v,1);
+    finalShowData();
+}
+let finalShowData = () => {
     let row = "";
-    for(let i = 0;i<setIngredients.length;i++){
+    for(let i = 0;i<editIngreArray.length;i++){
         row+=`<tr><td>${i+1}</td>
-            <td>${setIngredients[i].ingreName}</td>
-            <td>${setIngredients[i].qty}${setIngredients[i].unit}</td>
-            <td><input type="button" class='btn btn-warning' value="Edit" onclick="editData(${i})"/></td>
-            <td><input type="button" class='btn btn-danger' value="Delete" onclick="dltData(${i})"/></td></tr>`;
+            <td>${editIngreArray[i].ingreName}</td>
+            <td>${editIngreArray[i].qty}${editIngreArray[i].unit}</td>
+            <td><input type="button" class='btn btn-warning' value="Edit" onclick="finalEdit(${i})"/></td>
+            <td><input type="button" class='btn btn-danger' value="Delete" onclick="finalDlt(${i})"/></td></tr>`;
     }
     showDataIngredients.innerHTML += row;
-    firstForm.style.display = "block";
-    secondForm.style.display = "none";
 }
 // clearAllData from localStorage
 let clearAllData = () => {
