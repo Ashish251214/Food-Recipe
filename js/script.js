@@ -167,13 +167,37 @@ goBack.addEventListener('click',() => {
 });
 // dltBtn delete work station
 let dltBtn = (v) => {
+    let makeArray = [];
     let parseGetDataLocal = JSON.parse(localStorage.getItem('addDish'));
-    console.log(parseGetDataLocal);
+    for(let m=0;m<parseGetDataLocal.length;m++){
+        makeArray.push(parseGetDataLocal[m]);
+    }
+    makeArray.splice(v,1);
+    localStorage.setItem('addDish',JSON.stringify(makeArray));
+    getAllDataLocalStorage();
+    makeArray.splice(0,makeArray.length);
 }
 // edit complete Work station
 let editBtn = (v) => {
+    let cloneIngreArray = [],clonningArray=[];
     let parseGetDataLocal = JSON.parse(localStorage.getItem('addDish'));
-    console.log(parseGetDataLocal);
+    for(let m=0;m<parseGetDataLocal.length;m++){
+        clonningArray.push(parseGetDataLocal[m]);
+    }
+    let setIngredients = clonningArray[v].Ingredients;
+    console.log(setIngredients, "This is the array which i am going to use");
+    // array of ingredients
+    let row = "";
+    for(let i = 0;i<setIngredients.length;i++){
+        row+=`<tr><td>${i+1}</td>
+            <td>${setIngredients[i].ingreName}</td>
+            <td>${setIngredients[i].qty}${setIngredients[i].unit}</td>
+            <td><input type="button" class='btn btn-warning' value="Edit" onclick="editData(${i})"/></td>
+            <td><input type="button" class='btn btn-danger' value="Delete" onclick="dltData(${i})"/></td></tr>`;
+    }
+    showDataIngredients.innerHTML += row;
+    firstForm.style.display = "block";
+    secondForm.style.display = "none";
 }
 // clearAllData from localStorage
 let clearAllData = () => {
