@@ -293,6 +293,7 @@ let finalShowData = () => {
             <td><input type="button" class='btn btn-danger' value="Delete" onclick="finalDlt(${i})"/></td></tr>`;
     }
     showDataIngredients.innerHTML += row;
+    editIngreArray.splice(0,editIngreArray.length);
 }
 // clearAllData from localStorage
 let clearAllData = () => {
