@@ -1,5 +1,6 @@
 let enterDish = document.querySelector("#enterDish");
 let imgLink = document.querySelector("#imgLink");
+let foodRecipe = document.querySelector("#foodRecipe");
 let ingredients = document.querySelector("#ingredients");
 let quantity = document.querySelector("#quantity");
 let units = document.querySelector("#units");
@@ -90,9 +91,12 @@ function finalSubmit() {
         }else if(imgLink.value == "" || imgLink.value == null){
             err[0].innerHTML = "";
             err[1].innerHTML = "Please Enter the image link!";
-        }else{
+        }else if(foodRecipe.value == "" || foodRecipe.value == null){
             err[1].innerHTML = "";
-            storeTemp = getFinalData(enterDish.value,imgLink.value,ingreArray);
+            err[2].innerHTML = "Please Enter the Food Recipe";
+        }else{  
+            err[2].innerHTML = "";
+            storeTemp = getFinalData(enterDish.value,imgLink.value,foodRecipe.value,ingreArray);
             addDishGet = localStorage.getItem("addDish");
             if(addDishGet){
                 let parseData = JSON.parse(addDishGet);
@@ -109,7 +113,7 @@ function finalSubmit() {
                 console.log("We dont have found any entry of addDish that's why we created");
             }
             ingreArray.splice(0,ingreArray.length);
-            enterDish.value = imgLink.value = "";
+            enterDish.value = imgLink.value = foodRecipe.value = "";
             showDataIngredients.innerHTML = "";
         }
     }
@@ -117,8 +121,8 @@ function finalSubmit() {
 function addIngre(ingreName,qty,unit){
     return {ingreName,qty,unit,}
 }
-function getFinalData(dishName,imgLink,Ingredients) {
-    return {dishName,imgLink,Ingredients,}
+function getFinalData(dishName,imgLink,foodRecipe,Ingredients) {
+    return {dishName,imgLink,foodRecipe,Ingredients,}
 }
 // getalldata
 getAllDishes.addEventListener('click',() => {
@@ -143,6 +147,7 @@ let getAllDataLocalStorage = () => {
                 <td>${i+1}</td>  
                 <td>${tempData.dishName}</td>        
                 <td>${tempData.imgLink}</td>
+                <td>${tempData.foodRecipe}</td>
             `;
             ingreTemp = tempData.Ingredients;
             row += "<td><ol>";
@@ -184,6 +189,9 @@ let editBtn = (v) => {
     for(let m=0;m<parseGetDataLocal.length;m++){
         clonningArray.push(parseGetDataLocal[m]);
     }
+    let getDishName = clonningArray[v].dishName;
+    let getimgLink = clonningArray[v].imgLink;
+    selectedItem.value = "Dish Name: " + getDishName;
     let setIngredients = clonningArray[v].Ingredients;
     console.log(setIngredients, "This is the array which i am going to use");
     // array of ingredients
@@ -203,7 +211,7 @@ let editBtn = (v) => {
 let clearAllData = () => {
     let localData = JSON.parse(localStorage.getItem('addDish'));
     let isTrue = confirm("Do you want to clear all data");
-    if(localData.length >= 1){
+    if(localData){
         if(isTrue){
             localStorage.clear();
             getAllDataLocalStorage();

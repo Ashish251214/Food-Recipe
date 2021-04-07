@@ -78,6 +78,11 @@
                           <input type="text" class="form-control" aria-describedby="imgerr" id="imgLink" placeholder="Image Link">
                           <small id="imgerr" class="form-text text-light err"></small>
                         </div>
+                        <div class="form-group">
+                          <label for="foodRecipe">Food Recipe</label>
+                          <textarea class="form-control" id="foodRecipe" rows="3"></textarea>
+                          <small id="imgerr" class="form-text text-light err"></small>
+                        </div>
                         <button type="submit" id="addDishData" onclick="finalSubmit()" class="btn submitBtn btn-block">Finall Submit</button>
                     </form>
                 </div>
@@ -127,7 +132,7 @@
                 </div>
             </div>
         </div>
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
                     <h1>all dishes</h1>
@@ -144,12 +149,13 @@
             </div>
             <div class="row">
                 <div class="col-12 overFlow">
-                    <table class="table table-hover table-dark">
+                    <table class="table table-hover table-dark text-center">
                         <thead>
                           <tr>
                             <th scope="col">#</th>
                             <th scope="col">Dish Name</th>
                             <th scope="col">Image Link</th>
+                            <th scope="col">Food Recipe</th>
                             <th scope="col">Ingredients</th>
                             <th scope="col">Edit</th>
                             <th scope="col">Delete</th>
