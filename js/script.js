@@ -187,26 +187,24 @@ let dltBtn = (v) => {
     getAllDataLocalStorage();
     makeArray.splice(0,makeArray.length);
 }
-// edit complete Work station
-let setIngredients,setVIndex,editIngreArray = [],clonningArray=[],getDishName,getimgLink,getFoodRecipe;
+// edit complete Work station -----------------------------*******
+let setIngredients,setVIndex,editIngreArray = [],clonningArray=[];
 let editBtn = (v) => {
     setVIndex = v;
+    console.log(setVIndex , "We got from final edit btn")
     addmoreIngre.style.display = "block";
     addIngredientsData.style.display = "none";
     let parseGetDataLocal = JSON.parse(localStorage.getItem('addDish'));
     for(let m=0;m<parseGetDataLocal.length;m++){
         clonningArray.push(parseGetDataLocal[m]);
     }
-    getDishName = clonningArray[v].dishName;
-    getimgLink = clonningArray[v].imgLink;
-    getFoodRecipe = clonningArray[v].foodRecipe;
     // print value into their fields
-    enterDish.value = getDishName;
-    imgLink.value = getimgLink;
-    foodRecipe.value = getFoodRecipe;
-    selectedItem.value = "Dish Name: " + getDishName;
+    enterDish.value = clonningArray[v].dishName;
+    imgLink.value = clonningArray[v].imgLink;
+    foodRecipe.value = clonningArray[v].foodRecipe;
+    selectedItem.value = "Dish Name: " + clonningArray[v].dishName;
+    // making ingredients array
     setIngredients = clonningArray[v].Ingredients;
-    // ingredients
     for(k=0;k<setIngredients.length;k++){
         editIngreArray.push(setIngredients[k]);
     }
@@ -215,51 +213,6 @@ let editBtn = (v) => {
     firstForm.style.display = updateDishData.style.display= "block";
     secondForm.style.display = addDishData.style.display = "none";
 }
-// finall Update Button working here 
-updateDishData.addEventListener('click',() => {
-    event.preventDefault();
-    let updateEnterDish = enterDish.value;
-    let updateImgLink = imgLink.value;
-    let updateFoodRecipe = foodRecipe.value;
-    let makingObj = getFinalData(updateEnterDish,updateImgLink,updateFoodRecipe,editIngreArray);
-    clonningArray.splice(setVIndex,1,makingObj);
-    localStorage.setItem('addDish',JSON.stringify(clonningArray));
-    alert("You'r Data has been updated");
-    addmoreIngre.style.display = "none";
-    addIngredientsData.style.display = "block";
-    enterDish.value = imgLink.value = foodRecipe.value = showDataIngredients.innerHTML = "";
-});
-// final delete data
-let finalDlt = (v) => {
-    event.preventDefault();
-    console.log(editIngreArray , "Before Delete");
-    console.log("From: ", v, "Delete 1");
-    editIngreArray.splice(v,1);
-    console.log(editIngreArray, " After Delete");
-    finalShowData();
-}
-// final edit data
-let getVvalue,storeDataTemp;
-let finalEdit = (v) => {
-    event.preventDefault();
-    ingredients.value = editIngreArray[v].ingreName;
-    quantity.value = editIngreArray[v].qty;
-    units.value = editIngreArray[v].unit;
-    addIngredientsData.style.display = "none";
-    finalUpdateIngre.style.display = "block";
-    getVvalue = v;
-}
-finalUpdateIngre.addEventListener('click',() => {
-    event.preventDefault();
-    console.log(getVvalue);
-    storeDataTemp = addIngre(ingredients.value,quantity.value,units.value);
-    console.log(storeDataTemp , "We got this and val is: ",getVvalue);
-    editIngreArray.splice(getVvalue,1,storeDataTemp);
-    addIngredientsData.style.display = "block";
-    finalUpdateIngre.style.display = "none";
-    ingredients.value = quantity.value = units.value = "";
-    finalShowData();
-});
 // add more items
 addmoreIngre.addEventListener('click', () => {
     // editIngreArray
@@ -276,9 +229,54 @@ addmoreIngre.addEventListener('click', () => {
         ingreErr[2].innerHTML = "";
         let storeTemp = addIngre(ingredients.value,quantity.value,units.value);
         editIngreArray.push(storeTemp);
+        console.log(editIngreArray , "Add More button clicked");
         ingredients.value = quantity.value = units.value = "";
         finalShowData();
     }
+});
+// final edit data start
+let getVvalue,storeDataTemp;
+let finalEdit = (v) => {
+    event.preventDefault();
+    ingredients.value = editIngreArray[v].ingreName;
+    quantity.value = editIngreArray[v].qty;
+    units.value = editIngreArray[v].unit;
+    addmoreIngre.style.display = "none";
+    finalUpdateIngre.style.display = "block";
+    getVvalue = v;
+    console.log(getVvalue, "The index we want",editIngreArray);
+}
+finalUpdateIngre.addEventListener('click',() => {
+    event.preventDefault();
+    storeDataTemp = addIngre(ingredients.value,quantity.value,units.value);
+    editIngreArray.splice(getVvalue,1,storeDataTemp);
+    addmoreIngre.style.display = "block";
+    finalUpdateIngre.style.display = "none";
+    ingredients.value = quantity.value = units.value = "";
+    finalShowData();
+});
+// ************end
+// final delete data
+let finalDlt = (v) => {
+    event.preventDefault();
+    editIngreArray.splice(v,1);
+    finalShowData();
+}
+// finall Update Button working here 
+updateDishData.addEventListener('click',() => {
+    event.preventDefault();
+    let updateEnterDish = enterDish.value;
+    let updateImgLink = imgLink.value;
+    let updateFoodRecipe = foodRecipe.value;
+    let makingObj = getFinalData(updateEnterDish,updateImgLink,updateFoodRecipe,editIngreArray);
+    clonningArray.splice(setVIndex,1,makingObj);
+    localStorage.setItem('addDish',JSON.stringify(clonningArray));
+    alert("You'r Data has been updated");
+    addmoreIngre.style.display = updateDishData.style.display = "none";
+    addIngredientsData.style.display = addDishData.style.display = "block";
+    enterDish.value = imgLink.value = foodRecipe.value = showDataIngredients.innerHTML = "";
+    editIngreArray.splice(0,editIngreArray.length);
+    clonningArray.splice(0,clonningArray.length);
 });
 // final data show into their filed
 let finalShowData = () => {
@@ -293,7 +291,6 @@ let finalShowData = () => {
             <td><input type="button" class='btn btn-danger' value="Delete" onclick="finalDlt(${i})"/></td></tr>`;
     }
     showDataIngredients.innerHTML += row;
-    editIngreArray.splice(0,editIngreArray.length);
 }
 // clearAllData from localStorage
 let clearAllData = () => {
