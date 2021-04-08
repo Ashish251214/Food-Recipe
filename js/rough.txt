@@ -1,0 +1,15 @@
+//     let searchDataArray = [],polishData = [];
+//     polishData.splice(0,polishData.length);
+//     let searhValue = searchItemsHere.value;
+//     let searchValueResult = searhValue.toLowerCase();
+//     let getSearchData = JSON.parse(localStorage.getItem('addDish'));
+//     // let storeIngredientsName = getSearchData
+//     for(let i=0;i<getSearchData.length;i++){
+//         searchDataArray.push(getSearchData[i].Ingredients);
+//     }
+//     for(let j=0;j<searchDataArray.length;j++){
+//         for(let k=0;k<searchDataArray[j].length;k++){
+//             polishData.push(searchDataArray[j][k].ingreName);
+//         }
+//     }
+//     // the final search data is PolishData

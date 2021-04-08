@@ -305,16 +305,13 @@ let clearAllData = () => {
 }
 // Search Bar
 searchItemsHere.addEventListener("keyup",() => {
-    let searchDataArray = [],polishData = [];
-    let searhValue = searchItemsHere.value;
-    let searchValueResult = searhValue.toLowerCase();
-    let getSearchData = JSON.parse(localStorage.getItem('addDish'));
-    // let storeIngredientsName = getSearchData
-    for(let i=0;i<getSearchData.length;i++){
-        searchDataArray.push(getSearchData[i].Ingredients);
-    }
-    for(let j=0;j<searchDataArray.length;j++){
-        polishData.push(searchDataArray[j]);
-    }
-    console.log(polishData);
+    let searchValue = searchItemsHere.value;
+    let getShowAllData = document.querySelectorAll("#showAllData tr");
+    console.log(getShowAllData);
 });
+// $("#searchItemsHere").on("keyup", function() {
+//     var value = $(this).val().toLowerCase();
+//     $("#showAllData tr").filter(function() {
+//     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+//     });
+// });
