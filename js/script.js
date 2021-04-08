@@ -22,6 +22,7 @@ let updateIngre = document.querySelector("#updateIngre");
 let updateDishData = document.querySelector("#updateDishData");
 let finalUpdateIngre = document.querySelector("#finalUpdateIngre");
 let addmoreIngre = document.querySelector("#addmoreIngre");
+let redirectBtn = document.querySelector("#redirectBtn");
 // Add Ingredients Data
 function getIngre(){
     event.preventDefault();
@@ -192,7 +193,7 @@ let setIngredients,setVIndex,editIngreArray = [],clonningArray=[];
 let editBtn = (v) => {
     setVIndex = v;
     console.log(setVIndex , "We got from final edit btn")
-    addmoreIngre.style.display = "block";
+    addmoreIngre.style.display = redirectBtn.style.display = "block";
     addIngredientsData.style.display = "none";
     let parseGetDataLocal = JSON.parse(localStorage.getItem('addDish'));
     for(let m=0;m<parseGetDataLocal.length;m++){
@@ -272,7 +273,7 @@ updateDishData.addEventListener('click',() => {
     clonningArray.splice(setVIndex,1,makingObj);
     localStorage.setItem('addDish',JSON.stringify(clonningArray));
     alert("You'r Data has been updated");
-    addmoreIngre.style.display = updateDishData.style.display = "none";
+    addmoreIngre.style.display = updateDishData.style.display = redirectBtn.style.display = "none";
     addIngredientsData.style.display = addDishData.style.display = "block";
     enterDish.value = imgLink.value = foodRecipe.value = showDataIngredients.innerHTML = "";
     editIngreArray.splice(0,editIngreArray.length);
@@ -303,12 +304,16 @@ let clearAllData = () => {
         }
     }
 }
+// cancle button
+redirectBtn.addEventListener('click', () => {
+    firstForm.style.display = "none";
+    secondForm.style.display = "block";
+});
 // Search Bar
 searchItemsHere.addEventListener("keyup",() => {
     let searchValue = searchItemsHere.value;
     let searchLowerCase = searchValue.toLowerCase();
-    let getTable = document.getElementById("showAllData");
-    let getTableTR = getTable.getElementsByTagName("tr");
+    let getTableTR = showAllData.getElementsByTagName("tr");
     for(let i=0;i<getTableTR.length;i++){
         let tableTD = getTableTR[i].getElementsByTagName("td")[4];
         if(tableTD){
