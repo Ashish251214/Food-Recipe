@@ -303,3 +303,18 @@ let clearAllData = () => {
         }
     }
 }
+// Search Bar
+searchItemsHere.addEventListener("keyup",() => {
+    let searchDataArray = [],polishData = [];
+    let searhValue = searchItemsHere.value;
+    let searchValueResult = searhValue.toLowerCase();
+    let getSearchData = JSON.parse(localStorage.getItem('addDish'));
+    // let storeIngredientsName = getSearchData
+    for(let i=0;i<getSearchData.length;i++){
+        searchDataArray.push(getSearchData[i].Ingredients);
+    }
+    for(let j=0;j<searchDataArray.length;j++){
+        polishData.push(searchDataArray[j]);
+    }
+    console.log(polishData);
+});
