@@ -306,12 +306,18 @@ let clearAllData = () => {
 // Search Bar
 searchItemsHere.addEventListener("keyup",() => {
     let searchValue = searchItemsHere.value;
-    let getShowAllData = document.querySelectorAll("#showAllData tr");
-    console.log(getShowAllData);
+    let searchLowerCase = searchValue.toLowerCase();
+    let getTable = document.getElementById("showAllData");
+    let getTableTR = getTable.getElementsByTagName("tr");
+    for(let i=0;i<getTableTR.length;i++){
+        let tableTD = getTableTR[i].getElementsByTagName("td")[4];
+        if(tableTD){
+            let txtValue = tableTD.innerText;
+            if(txtValue.toLowerCase().indexOf(searchLowerCase) > -1) {
+                getTableTR[i].style.display = "";
+            }else{
+                getTableTR[i].style.display = "none";
+            }
+        }
+    }
 });
-// $("#searchItemsHere").on("keyup", function() {
-//     var value = $(this).val().toLowerCase();
-//     $("#showAllData tr").filter(function() {
-//     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-//     });
-// });
